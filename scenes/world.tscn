@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dxjcx3sutcxra"]
 
 [ext_resource type="Script" uid="uid://wq8od4gsowag" path="res://scripts/camera.gd" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://v6yiu8ygm7ri" path="res://scenes/robot.tscn" id="2_rwgxs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1oqaa"]
 albedo_color = Color(0.5882353, 0.5882353, 0.5882353, 1)
@@ -30,3 +31,6 @@ script = ExtResource("1_f3sb7")
 transform = Transform3D(0.71354336, 0.39502412, 0.5786293, -0.608221, 0.7591839, 0.2317479, -0.34774005, -0.5172967, 0.7819725, 0, 30, 0)
 light_energy = 2.0
 shadow_enabled = true
+
+[node name="Robot" parent="." unique_id=1176216235 instance=ExtResource("2_rwgxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23425347, 0)
