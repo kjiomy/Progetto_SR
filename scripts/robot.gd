@@ -8,7 +8,6 @@ func _ready() -> void:
 	DDS.subscribe("Theta")
 
 func _process(delta: float) -> void:
-	#print(theRobot.global_position.x, " ", -theRobot.global_position.z, " ", theRobot.global_rotation.y)
 	DDS.publish("tick", DDS.DDS_TYPE_FLOAT, delta)
 
 	var torque = DDS.read("Torque")
