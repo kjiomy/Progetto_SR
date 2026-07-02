@@ -10,9 +10,14 @@ config_version=5
 
 [application]
 
-config/name="New Game Project"
+config/name="Progetto_SR"
+run/main_scene="res://scenes/world.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+DDS="*uid://c83egafjho8b0"
 
 [display]
 
@@ -21,6 +26,7 @@ window/stretch/aspect="expand"
 
 [physics]
 
+common/physics_ticks_per_second=120
 3d/physics_engine="Jolt Physics"
 
 [rendering]
