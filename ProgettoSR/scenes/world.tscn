@@ -18,13 +18,15 @@ points = PackedVector3Array(25, 0, 25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
 [node name="Ground" type="StaticBody3D" parent="." unique_id=1213124250]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=727169080]
+transform = Transform3D(2.6770494, 0, 0, 0, 1, 0, 0, 0, 2.5280488, 0, 0, 0)
 mesh = SubResource("PlaneMesh_1oqaa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=651270857]
+transform = Transform3D(2.675825, 0, 0, 0, 1, 0, 0, 0, 2.5267112, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_1oqaa")
 
 [node name="Camera" type="Camera3D" parent="." unique_id=2013921923]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8296895, 6.993947)
+transform = Transform3D(-0.9999985, 7.2493886e-11, -0.0018168362, -0.00015068818, 0.9965545, 0.08293981, 0.0018105764, 0.08293993, -0.9965529, 0, 2.8296895, -3.9027214)
 script = ExtResource("1_f3sb7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=259613718]
@@ -33,4 +35,5 @@ light_energy = 2.0
 shadow_enabled = true
 
 [node name="Robot" parent="." unique_id=1176216235 instance=ExtResource("2_rwgxs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23425347, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+center_of_mass_mode = 1

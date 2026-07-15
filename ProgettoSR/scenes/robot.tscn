@@ -49,6 +49,7 @@ shape = SubResource("CylinderShape3D_13qtx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
 use_as_steering = true
 wheel_radius = 0.2
+wheel_friction_slip = 5.5
 
 [node name="Model" type="MeshInstance3D" parent="Wheel_FL" unique_id=906716950]
 transform = Transform3D(-0.015707368, -0.9998766, 0, 0.9998766, -0.015707368, 0, 0, 0, 1, 0, 0, 0)
@@ -58,6 +59,7 @@ mesh = SubResource("CylinderMesh_1oqaa")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.5)
 use_as_steering = true
 wheel_radius = 0.2
+wheel_friction_slip = 5.5
 
 [node name="Model" type="MeshInstance3D" parent="Wheel_FR" unique_id=2008536376]
 transform = Transform3D(-0.015707368, -0.9998766, 0, 0.9998766, -0.015707368, 0, 0, 0, 1, 0, 0, 0)
@@ -67,6 +69,7 @@ mesh = SubResource("CylinderMesh_1oqaa")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
 use_as_traction = true
 wheel_radius = 0.2
+wheel_friction_slip = 5.5
 
 [node name="Model" type="MeshInstance3D" parent="Wheel_BL" unique_id=1542972619]
 transform = Transform3D(-0.015707368, -0.9998766, 0, 0.9998766, -0.015707368, 0, 0, 0, 1, 0, 0, 0)
@@ -76,6 +79,7 @@ mesh = SubResource("CylinderMesh_1oqaa")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
 use_as_traction = true
 wheel_radius = 0.2
+wheel_friction_slip = 5.5
 
 [node name="Model" type="MeshInstance3D" parent="Wheel_BR" unique_id=1355976366]
 transform = Transform3D(-0.015707368, -0.9998766, 0, 0.9998766, -0.015707368, 0, 0, 0, 1, 0, 0, 0)

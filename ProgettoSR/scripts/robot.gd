@@ -4,14 +4,27 @@ extends VehicleBody3D
 
 
 func _ready() -> void:
+	self.can_sleep = false
 	DDS.subscribe("Torque")
 	DDS.subscribe("Theta")
 
 func _process(delta: float) -> void:
 	DDS.publish("tick", DDS.DDS_TYPE_FLOAT, delta)
+	DDS.publish("X", DDS.DDS_TYPE_FLOAT, global_position.x)
+	DDS.publish("Z", DDS.DDS_TYPE_FLOAT, global_position.z)
+	
+	# FIX: Otteniamo il vettore frontale 3D del veicolo (-Z in Godot)
+	var forward_dir = global_transform.basis.z
+	# Calcoliamo lo yaw 2D usando atan2, che combacerà esattamente con il math.atan2 di Python
+	var yaw_2d = atan2(forward_dir.z, forward_dir.x)
+	DDS.publish("Yaw", DDS.DDS_TYPE_FLOAT, yaw_2d)
+	
+	var current_speed = linear_velocity.length()
+	DDS.publish("Speed", DDS.DDS_TYPE_FLOAT, current_speed)
 
 	var torque = DDS.read("Torque")
 	var theta = DDS.read("Theta")
+	var brake_max = 100
 	
 	if theta != 0 and theta != null:
 			var theta_abs_rad = deg_to_rad(abs(theta))
@@ -34,5 +47,10 @@ func _process(delta: float) -> void:
 		$Wheel_FL.steering = 0.0
 		$Wheel_FR.steering = 0.0
 	
-	if(torque != null):
-		self.set_engine_force(torque) 
+	if torque != null:
+		if torque < 0:
+			self.set_engine_force(0.0)
+			self.set_brake(clamp(-torque, 0.0, brake_max))
+		else:
+			self.set_brake(0.0)
+			self.set_engine_force(torque)

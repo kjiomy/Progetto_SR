@@ -155,10 +155,6 @@ func subscribe_from_remote(peer : PacketPeerUDP, packet : PackedByteArray):
 	#print(variables)
 
 func publish_from_remote(peer : PacketPeerUDP, packet : PackedByteArray):
-	# publish packet format
-	# u8=type
-	# u8=string lenght + sequence of chars
-	# 4 bytes var value
 	var typ = packet.decode_u8(1)
 	var len = packet.decode_u8(2)
 	var subpacket = packet.slice(3, len + 3)
@@ -172,23 +168,6 @@ func publish_from_remote(peer : PacketPeerUDP, packet : PackedByteArray):
 		DDS_TYPE_FLOAT:
 			value = packet.decode_float(len + 3)
 	subscribed_vars[name] = value
-
-	var number_of_vars = packet.decode_u8(1)
-	var index = 2
-	var peer_var = {}
-	for i in range(number_of_vars):
-		var variable
-		if variables.get(name) == null:
-			variable = DDSVariable.new()
-			variable.init(name)
-			variables[name] = variable
-		else:
-			variable = variables[name]
-		variable.add_peer(peer)
-		peer_var[name] = variable
-		index += (len + 1)
-	subscribers[peer].set_var_list(peer_var)
-	#print(variables)
 
 
 func publish(name : String, type : int, value):
