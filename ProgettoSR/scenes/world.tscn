@@ -37,3 +37,4 @@ shadow_enabled = true
 [node name="Robot" parent="." unique_id=1176216235 instance=ExtResource("2_rwgxs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 center_of_mass_mode = 1
+can_sleep = false
