@@ -13,7 +13,11 @@ func _ready() -> void:
 	maze.solvepath = maze.solve_bfs(Vector2i(0, 0), Vector2i(maze.width - 1, maze.height - 1))
 	
 	if maze.solvepath.size() > 0:
-		spawn_robot_at(maze.solvepath[0])
+		var robot_instance: Robot = spawn_robot_at(maze.solvepath[0])
+		
+		for node in maze.solvepath:
+			robot_instance.punti.append([node.position.x,node.position.z])
+		print(robot_instance.punti)
 		var center = Vector3(maze.width * maze.cell_size / 2.0, 0, maze.height * maze.cell_size / 2.0)
 		overlook_cam.position = center + Vector3(0, maze.width * 8, 0)
 		overlook_cam.look_at(center)
@@ -36,10 +40,12 @@ func update_camera_mode() -> void:
 		overlook_cam.make_current()
 		print("Switched to Overlook Camera")
 
-func spawn_robot_at(target_node: MazeNode) -> void:
+func spawn_robot_at(target_node: MazeNode) -> Robot:
 	if robot:
 		var robot_instance = robot.instantiate()
 		robot_instance.name = "my_robot"
 		add_child(robot_instance)
 		
 		robot_instance.global_position = target_node.global_position + Vector3(0, 0.5, 0)
+		return robot_instance
+	return null
