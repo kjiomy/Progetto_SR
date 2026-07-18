@@ -8,16 +8,21 @@ var chase_cam: Camera3D
 var use_chase_cam: bool = false
 
 func _ready() -> void:
-	maze.gen_maze(Vector2i(0, 0))
-	maze.render_maze()
-	maze.solvepath = maze.solve_bfs(Vector2i(0, 0), Vector2i(maze.width - 1, maze.height - 1))
+	# RIMUOVI queste righe perché maze.gd le chiama già nel suo _ready()!
+	# maze.gen_maze(Vector2i(0, 0))
+	# maze.render_maze()
+	# maze.solvepath = maze.solve_bfs(Vector2i(0, 0), Vector2i(maze.width - 1, maze.height - 1))
 	
+	# Affidati direttamente a maze.solvepath che è già stato calcolato da maze.gd
 	if maze.solvepath.size() > 0:
 		var robot_instance: Robot = spawn_robot_at(maze.solvepath[0])
 		
 		for node in maze.solvepath:
-			robot_instance.punti.append([node.position.x,node.position.z])
+			robot_instance.punti.append([node.global_position.x, node.global_position.z])
+			
+		robot_instance.punti.append([-999,-999])
 		print(robot_instance.punti)
+		
 		var center = Vector3(maze.width * maze.cell_size / 2.0, 0, maze.height * maze.cell_size / 2.0)
 		overlook_cam.position = center + Vector3(0, maze.width * 8, 0)
 		overlook_cam.look_at(center)

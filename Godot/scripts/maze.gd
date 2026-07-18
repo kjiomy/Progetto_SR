@@ -1,8 +1,8 @@
 extends Node3D
 class_name Maze
 
-@export var width: int = 10
-@export var height: int = 10
+@export var width: int = 5
+@export var height: int = 5
 var grid: Array[Array] = []
 var solvepath: Array[MazeNode] = []
 @export var maze_node_scene: PackedScene = preload("res://scenes/maze_node.tscn")
