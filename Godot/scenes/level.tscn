@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c3f074gcmgyn"]
+
+[ext_resource type="Script" uid="uid://4jnykww67ahl" path="res://scripts/level.gd" id="1_ppgk2"]
+[ext_resource type="PackedScene" uid="uid://v6yiu8ygm7ri" path="res://scenes/robot.tscn" id="2_2r41h"]
+[ext_resource type="Script" uid="uid://bd368cnx1q0fn" path="res://scripts/maze.gd" id="3_klq6b"]
+[ext_resource type="Material" uid="uid://cxei1ugbnqkws" path="res://prototype_textures/materials/black_material.tres" id="4_b121j"]
+[ext_resource type="Material" uid="uid://bhxov55o4cgfs" path="res://prototype_textures/materials/orange_material.tres" id="5_8c41q"]
+
+[sub_resource type="Environment" id="Environment_1oqaa"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[node name="level" type="Node3D" unique_id=134598785]
+script = ExtResource("1_ppgk2")
+robot = ExtResource("2_2r41h")
+
+[node name="Maze" type="Node3D" parent="." unique_id=1661609529]
+script = ExtResource("3_klq6b")
+wall_material = ExtResource("4_b121j")
+floor_material = ExtResource("5_8c41q")
+metadata/_custom_type_script = "uid://bd368cnx1q0fn"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=138936678]
+environment = SubResource("Environment_1oqaa")
+
+[node name="OverlookCamera" type="Camera3D" parent="." unique_id=726685989]

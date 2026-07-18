@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://boifmw8bjefm1"]
+
+[ext_resource type="Script" uid="uid://cbhwt2ovbptf8" path="res://scripts/maze_node.gd" id="1_i0t8u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_13qtx"]
+transparency = 1
+albedo_color = Color(0, 0.18333316, 1, 0.40392157)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1oqaa"]
+material = SubResource("StandardMaterial3D_13qtx")
+radius = 0.25
+height = 0.5
+
+[node name="MazeNode" type="Node3D" unique_id=1765258817]
+script = ExtResource("1_i0t8u")
+
+[node name="NodeMesh" type="MeshInstance3D" parent="." unique_id=1301965948]
+mesh = SubResource("SphereMesh_1oqaa")
