@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dxjcx3sutcxra"]
+
+[ext_resource type="Script" uid="uid://wq8od4gsowag" path="res://scripts/camera.gd" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://v6yiu8ygm7ri" path="res://scenes/robot.tscn" id="2_rwgxs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1oqaa"]
+albedo_color = Color(0.5882353, 0.5882353, 0.5882353, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1oqaa"]
+material = SubResource("StandardMaterial3D_1oqaa")
+size = Vector2(50, 50)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1oqaa"]
+points = PackedVector3Array(25, 0, 25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
+
+[node name="World" type="Node3D" unique_id=2026481351]
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=1213124250]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=727169080]
+mesh = SubResource("PlaneMesh_1oqaa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=651270857]
+shape = SubResource("ConvexPolygonShape3D_1oqaa")
+
+[node name="Camera" type="Camera3D" parent="." unique_id=2013921923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8296895, 6.993947)
+script = ExtResource("1_f3sb7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=259613718]
+transform = Transform3D(0.71354336, 0.39502412, 0.5786293, -0.608221, 0.7591839, 0.2317479, -0.34774005, -0.5172967, 0.7819725, 0, 30, 0)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="Robot" parent="." unique_id=1176216235 instance=ExtResource("2_rwgxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23425347, 0)
