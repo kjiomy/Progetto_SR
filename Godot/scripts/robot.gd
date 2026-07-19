@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 	var torque = DDS.read("Torque")
 	var theta = DDS.read("Theta")
 	var index = DDS.read("Index")
-	print("Posizione robot", position)
+	#print("Posizione robot", position)
 	if index != null:
 		indice = index
 	else:
