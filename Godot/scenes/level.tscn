@@ -2,25 +2,105 @@
 
 [ext_resource type="Script" uid="uid://4jnykww67ahl" path="res://scripts/level.gd" id="1_ppgk2"]
 [ext_resource type="PackedScene" uid="uid://v6yiu8ygm7ri" path="res://scenes/robot.tscn" id="2_2r41h"]
-[ext_resource type="Script" uid="uid://bd368cnx1q0fn" path="res://scripts/maze.gd" id="3_klq6b"]
-[ext_resource type="Material" uid="uid://cxei1ugbnqkws" path="res://prototype_textures/materials/black_material.tres" id="4_b121j"]
-[ext_resource type="Material" uid="uid://bhxov55o4cgfs" path="res://prototype_textures/materials/orange_material.tres" id="5_8c41q"]
+[ext_resource type="PackedScene" uid="uid://fyoxrbv34auh" path="res://scenes/maze.tscn" id="2_mx8sn"]
+[ext_resource type="Material" uid="uid://bhpoix8va0a3f" path="res://assets/Concrete047A_1K-PNG/Concrete047A_1K-PNG.tres" id="6_2r41h"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_klq6b"]
+sky_top_color = Color(0.060000002, 0.6553334, 1, 1)
+sky_horizon_color = Color(0.96, 0.97533333, 1, 1)
+
+[sub_resource type="Sky" id="Sky_bo7es"]
+sky_material = SubResource("ProceduralSkyMaterial_klq6b")
 
 [sub_resource type="Environment" id="Environment_1oqaa"]
-ambient_light_source = 2
+background_mode = 2
+sky = SubResource("Sky_bo7es")
+ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.5
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1oqaa"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1oqaa"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_13qtx"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [node name="level" type="Node3D" unique_id=134598785]
 script = ExtResource("1_ppgk2")
+maze = ExtResource("2_mx8sn")
 robot = ExtResource("2_2r41h")
 
-[node name="Maze" type="Node3D" parent="." unique_id=1661609529]
-script = ExtResource("3_klq6b")
-wall_material = ExtResource("4_b121j")
-floor_material = ExtResource("5_8c41q")
-metadata/_custom_type_script = "uid://bd368cnx1q0fn"
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1152482858]
+transform = Transform3D(0.8660254, 0.35355338, -0.35355338, 0, 0.70710677, 0.70710677, 0.5, -0.6123724, 0.6123724, 0, 0, 0)
+shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=138936678]
 environment = SubResource("Environment_1oqaa")
 
 [node name="OverlookCamera" type="Camera3D" parent="." unique_id=726685989]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1502183663]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+material_override = ExtResource("6_2r41h")
+mesh = SubResource("PlaneMesh_1oqaa")
+
+[node name="MainMenu" type="CanvasLayer" parent="." unique_id=490095291]
+
+[node name="ColorRect" type="ColorRect" parent="MainMenu" unique_id=291878698]
+offset_right = 1153.0
+offset_bottom = 649.0
+color = Color(0.31735548, 0.49045694, 0.30801004, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu" unique_id=176090577]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -120.0
+offset_right = 91.5
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="HBoxWidth" type="HBoxContainer" parent="MainMenu/VBoxContainer" unique_id=1395651661]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMenu/VBoxContainer/HBoxWidth" unique_id=973742867]
+layout_mode = 2
+text = "Larghezza:            "
+label_settings = SubResource("LabelSettings_1oqaa")
+
+[node name="WidthSpinBox" type="SpinBox" parent="MainMenu/VBoxContainer/HBoxWidth" unique_id=650389053]
+layout_mode = 2
+min_value = 2.0
+value = 2.0
+alignment = 1
+
+[node name="HBoxHeight" type="HBoxContainer" parent="MainMenu/VBoxContainer" unique_id=1811267770]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMenu/VBoxContainer/HBoxHeight" unique_id=1544381011]
+layout_mode = 2
+text = "Altezza:                 "
+label_settings = SubResource("LabelSettings_13qtx")
+
+[node name="HeightSpinBox" type="SpinBox" parent="MainMenu/VBoxContainer/HBoxHeight" unique_id=1483827125]
+layout_mode = 2
+min_value = 2.0
+value = 2.0
+alignment = 1
+
+[node name="GenerateButton" type="Button" parent="MainMenu/VBoxContainer" unique_id=2009633099]
+layout_mode = 2
+text = "Genera Labirinto"
+
+[connection signal="pressed" from="MainMenu/VBoxContainer/GenerateButton" to="." method="_on_generate_button_pressed"]

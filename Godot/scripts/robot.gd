@@ -1,17 +1,11 @@
 extends VehicleBody3D
+class_name Robot
 @onready var L : float = abs($Wheel_FL.position.z - $Wheel_BL.position.z) # Distanza tra ruote anteriori e posteriori
 @onready var W : float = abs($Wheel_FL.position.x - $Wheel_FR.position.x) # Distanza tra le ruote sterzanti
 
-var punti = [
-	[0.0, 10.0],
-	[10.0, 10.0],
-	[10.0, 0.0],
-	[0.0, 0.0],
-	[-15, -15]
-]
+var punti = []
 
 var indice = 0;
-
 
 func _ready() -> void:
 	self.can_sleep = false
@@ -26,7 +20,7 @@ func _physics_process(delta: float) -> void:
 	var torque = DDS.read("Torque")
 	var theta = DDS.read("Theta")
 	var index = DDS.read("Index")
-	
+	#print("Posizione robot", position)
 	if index != null:
 		indice = index
 	else:
