@@ -15,7 +15,7 @@ func _ready() -> void:
 	self.can_sleep = false
 	DDS.subscribe("Torque")
 	DDS.subscribe("Theta")
-	DDS.subscribe("Index")
+	DDS.subscribe("Control_Index")
 
 var time_passed: float = 0.0
 var publish_rate: float = 0.05
@@ -23,15 +23,15 @@ var publish_rate: float = 0.05
 func _physics_process(delta: float) -> void:
 	var torque = DDS.read("Torque")
 	var theta = DDS.read("Theta")
-	var index = DDS.read("Index")
+	var Control_Index = DDS.read("Control_Index")
 	#print("Posizione robot", position)
-	if index != null:
-		indice = index
+	if Control_Index != null:
+		indice = Control_Index
 	else:
 		pass
 	
 	
-	var brake_max = 200
+	var brake_max = 100
 	
 	if theta != null and theta != 0:
 		var theta_abs_rad = deg_to_rad(abs(theta))
@@ -77,7 +77,7 @@ func _physics_process(delta: float) -> void:
 		DDS.publish("Speed", DDS.DDS_TYPE_FLOAT, current_speed)
 		DDS.publish("X_dest", DDS.DDS_TYPE_FLOAT, punti[indice][0])
 		DDS.publish("Z_dest", DDS.DDS_TYPE_FLOAT, punti[indice][1])
-		DDS.publish("Indice", DDS.DDS_TYPE_INT, indice)
+		DDS.publish("Robot_index", DDS.DDS_TYPE_INT, indice)
 		DDS.publish("Trajectory_Type", DDS.DDS_TYPE_INT, cur_trajectory)
 		
 
