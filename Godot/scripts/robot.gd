@@ -5,7 +5,11 @@ class_name Robot
 
 var punti = []
 
-var indice = 0;
+var indice = 0
+
+const STRAIGHT = 0
+const TURN = 1
+const STOP = 2
 
 func _ready() -> void:
 	self.can_sleep = false
@@ -68,8 +72,31 @@ func _physics_process(delta: float) -> void:
 		var yaw_2d = atan2(forward_dir.x, forward_dir.z)
 		DDS.publish("Yaw", DDS.DDS_TYPE_FLOAT, yaw_2d)
 		
+		var cur_trajectory = calc_trajectory_type(indice)
 		var current_speed = linear_velocity.length()
 		DDS.publish("Speed", DDS.DDS_TYPE_FLOAT, current_speed)
 		DDS.publish("X_dest", DDS.DDS_TYPE_FLOAT, punti[indice][0])
 		DDS.publish("Z_dest", DDS.DDS_TYPE_FLOAT, punti[indice][1])
 		DDS.publish("Indice", DDS.DDS_TYPE_INT, indice)
+		DDS.publish("Trajectory_Type", DDS.DDS_TYPE_INT, cur_trajectory)
+		
+
+func calc_trajectory_type(idx: int) -> int:
+	if idx >= punti.size() - 2:
+		return STOP
+	
+	var p1 := Vector2(self.position.x,self.position.z)
+	var p2 := Vector2(punti[idx][0], punti[idx][1])
+	var p3 := Vector2(punti[idx + 1][0], punti[idx + 1][1])
+	
+	var dir1 := (p2 - p1).normalized()
+	var dir2 := (p3 - p2).normalized()
+	
+	# Qui l'angolo minimo per la traiettoria "dritta" e' abbastanza
+	# largo dato che tutte le curve del labirtinto sono di 90 gradi
+	# e non vogliamo che una piccola variazione di traiettoria
+	# triggeri lo stato di curva
+	if dir1.dot(dir2) > 0.5: 
+		return STRAIGHT
+	else:
+		return TURN
