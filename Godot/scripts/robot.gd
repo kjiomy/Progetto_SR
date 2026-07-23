@@ -85,7 +85,7 @@ func _physics_process(delta: float) -> void:
 		
 
 func calc_trajectory_type(idx: int) -> int:
-	if idx >= punti.size() - 2:
+	if idx >= punti.size() - 1:
 		return STOP
 	
 	var p1 := Vector2(self.position.x,self.position.z)
