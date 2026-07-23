@@ -5,6 +5,9 @@ class_name Robot
 
 var punti = []
 
+
+
+
 var indice = 0
 
 const STRAIGHT = 0
@@ -31,7 +34,7 @@ func _physics_process(delta: float) -> void:
 		pass
 	
 	
-	var brake_max = 100
+	var brake_max = 30
 	
 	if theta != null and theta != 0:
 		var theta_abs_rad = deg_to_rad(abs(theta))
@@ -100,3 +103,4 @@ func calc_trajectory_type(idx: int) -> int:
 		return STRAIGHT
 	else:
 		return TURN
+		
