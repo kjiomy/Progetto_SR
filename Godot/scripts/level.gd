@@ -54,10 +54,10 @@ func _on_generate_button_pressed() -> void:
 		for node in maze_instance.solvepath:
 			robot_instance.punti.append([node.global_position.x, node.global_position.z])
 			
-		robot_instance.punti.append([-999,-999])
+		#robot_instance.punti.append([-999,-999])
 		print(robot_instance.punti)
 		
-		var center = Vector3(maze_instance.width * maze_instance.cell_size / 2.0, 0, maze_instance.height * maze_instance.cell_size / 2.0)
+		var center = Vector3((maze_instance.width-1) * maze_instance.cell_size / 2.0, 0, (maze_instance.height-1) * maze_instance.cell_size / 2.0)
 		overlook_cam.position = center + Vector3(0, maze_instance.width * 8, 0)
 		overlook_cam.look_at(center)
 		
